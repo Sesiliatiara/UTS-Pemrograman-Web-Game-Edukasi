@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!-- tag html yang berfungsi untuk mendefinisikan dokumen menjadi HTML agar bisa dibaca oleh browser -->
+<html>
+<!-- tag head ini berfungsi memberikan informasi tentang dokumen seperti kita bisa menambahkan tag-tag yang digunakan untuk memberikan informasi seperti judul dokumen, dan tag style untuk mengatur elemen-elemen -->
+<head>
+	<!-- tag title tersebut berfungsi untuk menambahkan judul website -->
+	<title>Quiz Perkalian Matematika</title> 
+	<!-- tag style dengan type css ini digunakan untuk menyisipkan kode css dalam dokumen html -->
+	<style type="text/css"> 
+		/* pada baris 11 sampai 13 terdapat pengaturan untuk semua elemen dengan margin, padding, dan border 0 serta mengatur lebar elemen box agar sesuai */
+		* {
+			margin:0; padding:0; border:0;
+			box-sizing:border-box;
+		}
+		/* pada baris 16 terdapat pengaturan untuk menyesuaikan tinggi di website kita dengan ukuran monitor */
+		html, body { height:100%; }
+		/* untuk baris 18 sampai 27 adalah pengaturan css untuk mengatur elemen yang akan tampil dalam website dengan memberikan display flex supaya memungkinkan untuk pengaturan layout, posisi dan tampilan dari konten */
+		body {
+			display:flex;
+			justify-content:center;
+			align-items:center;
+
+			background-image:url(bg4.jpeg);
+       		background-size: cover;
+        	background-attachment: fixed;
+			color:#fff;
+			font-family:arial;
+		}
+		/* css di bawah ini mengatur jarak antar atribut dalam elemen game */
+		[game] > div {
+			margin:5px 0;
+		}
+		/* css di bawah ini berfungsi untuk mengatur font dan margin dari judul game */
+		h1 {
+			margin-bottom:30px;
+			font-size: 40px;
+		}
+		/* baris 37 berfungsi untuk mengatur font size dari progres soal */
+		[progress-soal] {
+			font-size:15px;
+		}
+		/* baris 47 berfungsi untuk mengatur font size dari progres soal */
+		[quis-soal] {
+			font-size:25px;
+		}
+		/* baris 46 sampai 49 untuk mengatur lebar, padding, dan margin dari atribut jawab soal */
+		[jawab-soal] {
+			width:400px;
+			padding:5px 10px;
+			margin-bottom:10px;
+		}
+		/* css di bawah ini berfungsi untuk memberikan padding, warna background, dan font weight dari tombol */
+		button {
+			padding:5px 10px;
+			background:#FF1818;
+			font-weight:bold;
+		}
+	</style>
+</head>
+<!-- tag body di bawah ini berfungsi untuk menunjukkan isi konten dari sebuah dokumen -->
+<body>
+	<!-- terdapat elemen div dengan atribut game yang akan berisi pengaturan semua elemen dalam game tersebut -->
+	<div game>
+		<!-- h1 ini berfungsi untuk menambakan judul game pada tampilan game nanti -->
+		<h1>Quiz Perkalian Matematika</h1>
+		<!-- terdapat elemen dengan atribut progress soal untuk menyimpan progress dari soal --> 
+		<div progress-soal>1/10 Soal</div>
+		<!-- elemen di bawah ini dengan atribut quis soal berguna untuk menampilkan soal pada game nantinya -->
+		<div quis-soal>Berapa hasil dari 5x2</div>
+		<!-- elemen berupa text di bawah ini berguna untuk menampilkan timer pengerjaan dalam game -->
+		<text>Second left: <text id="time0">50</text></text><br/>
+		<!-- elemen dibawah ini dengan atribut jawab soal berguna untuk mendefinisikan jawaban dari soal yaitu berupa number/angka -->
+		<div>
+			<input jawab-soal type="number">
+		</div>
+		<!--elemen dibawah ini untuk mengatur 2 button dengan fungsi yang berbeda yaitu menjawab dan memulai ulang game -->
+		<div>
+			<button onclick="kirimJawaban()">Answer</button>
+			<button onclick="mulaiGame()">Start Again</button>
+		</div>
+	</div>
+	<!--di bawah ini terdapat script dengan type javascript berfungsi sebagai bahasa fungsional Javascript mengimplementasikan fungsi kelas pertama (first class function). Fungsi dapat disimpan dalam variabel, dikembalikan oleh fungsi lain, dan dikirimkan sebagai argumen untuk fungsi lainnya-->
+
+	<script type="text/javascript">
+		// pada baris 79 sampai baris 83 variabel tersebut memiliki tipe data yang menunjukkan bahwa setiap variabel belum memiliki nilai/data
+		var quis_soal = null
+		var quis_total = null
+		var quis_score = null
+		var soal_jawab = null
+
+		// terdapat function el yang berarti elemen untuk mengambil elemen berdasarkan atributnya
+		el = (str)=>{
+			return document.querySelector(str)
+		}
+
+		// function acak soal di bawah ini berguna untuk mengacak setiap angka dari setiap soal dengan angka random dari 1-10 dan memberikan deklarasi berupa operasi perkalian, dan juga mengatur elemen progress soal dan quis soal supaya angka yang ditampilkan sesuai dengan yang diatur
+		acakSoal = ()=> {
+			let a = Math.floor(Math.random()*10)+1
+			let b = Math.floor(Math.random()*10)+1
+			soal_jawab = a * b
+
+			el("[progress-soal]").innerHTML = `${quis_soal} / ${quis_total} Soal`
+			el("[quis-soal]").innerHTML = `Berapa hasil dari ${a} x ${b}`
+		}
+
+		// di bawah ini terdapat function kirim jawaban yang berguna untuk mengatur saat menjawab soal seperti input an mengambil dari elemen jawab soal yaitu dengan tipe number, mengatur bahwa nilai input awal masih kosong, lalu melakukan pengecekan apabila jawaban kita benar maka score akan ditamba menjadi 10 dari setiap soal, mengatur soal apabila masih berjalan maka soal akan diacak kembali, dan menambahkan notifikasi score ketika selesai menjawab soal
+		kirimJawaban = ()=> {
+			let input = el("[jawab-soal]")
+			let jawaban = input.value
+			input.value = ""
+
+			if(jawaban == soal_jawab) {
+				quis_score += 10
+			}
+			quis_soal += 1
+			if(quis_soal <= quis_total) {
+				acakSoal()
+			}
+			else {
+				c = "-";
+				alert("Quis Selesai\n\nScore Anda : " + quis_score)
+			}
+		}
+
+		// di bawa ini terdapat fungsi timer yang berguna untuk menambahkan timer yaitu sebanyak 50 detik untuk pengerjaan soal, apabila waktu habis maka akan memunculkan notifikasi time's up tanda waktu telah berakhir dan silahkan mulai ulang untuk memainkan game kembali
+		 function timer001() {
+            c = c - 1;
+            if (c < 50) {
+                time0.innerHTML = c;
+            }
+
+            if (c < 1) {
+                window.clearInterval(update);
+                alert("Time's up") 
+        }
+    }
+    		// Sourcecode di bawah ini berguna untuk mengeksekusi fungsi timer beberapa kali dalam 1 set interval waktu yang secara spesifik yaitu 1000 milidetik sama dengan 1 detik
+    		update = setInterval("timer001()", 1000);
+
+// fungsi mulai game dibawah ini berguna untuk mengatur game ketika dalam keadaan reset/mulai ulang maka waktu pengerjaan akan direset, progress soal dimulai dari 1, quis score direset menjadi 0, dan memanggil function acak soal
+		mulaiGame = ()=> {
+			c = 50;
+			quis_soal = 1
+			quis_total = 10
+			quis_score = 0
+			acakSoal()
+			update 
+
+		}
+// window onload merupakan event ketika selesai dimuat lalu memanggil fungsi mulai game
+		window.onload = ()=> {
+			mulaiGame()
+		}
+	</script>
+</body>
+</html>

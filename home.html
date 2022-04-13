@@ -1,0 +1,78 @@
+<!-- tag html yang berfungsi untuk mendefinisikan dokumen menjadi HTML agar bisa dibaca oleh browser -->
+<html>
+<!-- tag head ini berfungsi memberikan informasi tentang dokumen seperti kita bisa menambahkan tag-tag yang digunakan untuk memberikan informasi seperti judul dokumen, dan tag style untuk mengatur elemen-elemen -->
+<head>
+    <!-- tag script dibawah ini untuk menghubungkan file html dengan jquery-->
+    <script text="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        /*dibawah ini merupakan event dari JQuery yang dijalankan pertama kali setelah dokumen dimuat.*/
+        $(document).ready(function() {
+            $("a").click(function() {
+                alert("Selamat datang di Quiz Perkalian Matematika");
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- h2 ini berfungsi untuk menambahkan judul game pada tampilan home nanti -->
+    <p><h2>Quiz Perkalian Matematika</h1></p>
+    <!-- h3 ini berfungsi untuk menambahkan subjudul game pada tampilan home nanti -->
+    <p><h3>Selamat Datang di Quiz Perkalian Matematika</h2></p>
+    <!-- p ini berfungsi untuk menambahkan paragraf baru pada tampilan home nanti -->
+    <p>Please input form below and press <b>Start</b> button to play the game.</p>
+    <!-- p di bawah ini berfungsi menambahkan atribut username dengan tipe text, dan ditempatkan pada center dari tampilan home -->
+    <p><center>Username <input type = "text" name = "nama"> </p></center>
+    <!-- a href di bawah ini berfungsi untuk mendefinisikan alamat url yang nantinya akan dituju -->
+    <a href="GamePerkalian.html">START</a>
+</body>
+<!-- tag style dengan type css ini digunakan untuk menyisipkan kode css dalam dokumen html -->
+<style type="text/css">
+    /* pada baris 25 sampai 28 terdapat pengaturan untuk semua elemen dengan margin, padding, dan border 0 serta mengatur lebar elemen box agar sesuai */
+    * {
+        margin:0; padding:0; border:0;
+        box-sizing:border-box;
+    }
+    /* pada baris 30 terdapat pengaturan untuk menyesuaikan tinggi di website kita dengan ukuran monitor */
+    html, body { height:100%; }
+    /* untuk baris 32 sampai 42 adalah pengaturan css untuk mengatur elemen yang akan tampil dalam website dengan memberikan display grid supaya memungkinkan untuk pengaturan layout, posisi dan tampilan dari konten */
+    body {
+        display:grid;
+        justify-content:center;
+        align-items:center;
+
+        background-image:url(bg7.jpeg);
+        background-size: cover;
+        background-attachment: fixed;
+        color:#fff;
+        font-family:arial;
+    }
+    /* css di bawah ini berfungsi untuk mengatur margin, perataan kalimat menjadi rata tengah, tanpa text dekorasi, padding, dan ukuran font dari h2 */
+    h2 {
+        margin-top: 180px;
+        text-align: center;
+        text-decoration: none;
+        padding:5px 10px;
+        font-size: 40px;
+		}
+    /* css di bawah ini berfungsi untuk mengatur margin, perataan kalimat menjadi rata tengah, tanpa text dekorasi, padding, dan ukuran font dari h3 */
+    h3 {
+        margin-top: -60px;
+        text-align: center;
+        text-decoration: none;
+        padding:5px 10px;
+        font-size: 30px;
+		}
+    /* css di bawah ini berfungsi untuk mengatur margin, perataan kalimat menjadi rata tengah, dan ukuran font dari p */
+    p {
+        margin-top: -200px;
+        margin-bottom: -100px;
+        text-align: center;
+        font-size: 18px;}
+    /* css di bawah ini berfungsi untuk mengatur padding, font tebal, perataan kalimat menjadi rata tengah, dan warna font dari a */
+    a {
+        padding:5px 10px;
+        font-weight:bold;
+        text-align: center;
+        color: darkred;}
+</style>
+</html>
